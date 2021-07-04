@@ -18,6 +18,7 @@ class Solution:
         print combinations of players whose
         heights add up to a given target.
         """
+        if type(target) != int: raise TypeError
         if target <= 0:
             print("No matches found.")
             return
@@ -25,8 +26,10 @@ class Solution:
         answer = []
         for player in self.players:
             player_name = f'{player["first_name"]} {player["last_name"]}'
-            answer += [f"- {player_name}\t{player_two_name}" for player_two_name in heights_map[target - player["h_in"]]]
-            heights_map[player["h_in"]].append(player_name)
+            answer += [
+                f"- {player_name}\t{player_two_name}" for player_two_name in heights_map[target - int(player["h_in"])]
+            ]
+            heights_map[int(player["h_in"])].append(player_name)
         print("\n".join(answer))
         if not answer:
             print("No matches found.")
